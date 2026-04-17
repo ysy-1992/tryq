@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>杭州五一旅行</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+            background: #f2f2f7;
+            color: #1c1c1e;
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(160deg, #0d5c3a 0%, #1a8a56 55%, #34c97a 100%);
+            padding: 56px 20px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 260px; height: 260px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 50%;
+            right: -60px; bottom: -80px;
+        }
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: #a8ffd4;
+        }
+        .hero-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 24px;
+        }
+        .hero-chips {
+            display: flex;
+            gap: 8px;
+        }
+        .chip {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 8px 14px;
+            text-align: center;
+            color: #fff;
+        }
+        .chip .n { font-size: 18px; font-weight: 700; display: block; }
+        .chip .l { font-size: 11px; opacity: 0.8; }
+
+        /* ── Section ── */
+        .section {
+            padding: 0 16px;
+        }
+
+        .day-banner {
+            margin: 20px 0 12px;
+            background: linear-gradient(135deg, #1a8a56, #34c97a);
+            border-radius: 16px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .day-banner.day2 {
+            background: linear-gradient(135deg, #1a5c8a, #34a0c9);
+        }
+        .day-banner-left h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .day-banner-left p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 3px;
+        }
+        .day-num {
+            font-size: 42px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.25);
+            line-height: 1;
+        }
+
+        /* ── Route Strip ── */
+        .route-strip {
+            background: #fff;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .route-strip::-webkit-scrollbar { display: none; }
+        .route-strip-label {
+            font-size: 11px;
+            color: #8e8e93;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .route-inner {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .rn {
+            background: #e8f8f0;
+            color: #1a8a56;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 11px;
+            border-radius: 10px;
+        }
+        .ra { color: #c7c7cc; font-size: 14px; }
+
+        /* ── Timeline ── */
+        .timeline { position: relative; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 22px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #34c97a, #34a0c9, #ff9f0a, #ff453a);
+            border-radius: 2px;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .tl-left {
+            width: 44px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 16px;
+        }
+        .tl-dot {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 2.5px solid #fff;
+            box-shadow: 0 0 0 2px currentColor;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .tl-time {
+            font-size: 10px;
+            font-weight: 700;
+            color: #8e8e93;
+            margin-top: 5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .c-drive   { color: #34c97a; background: #34c97a; }
+        .c-food    { color: #ff9f0a; background: #ff9f0a; }
+        .c-hotel   { color: #bf5af2; background: #bf5af2; }
+        .c-metro   { color: #0a84ff; background: #0a84ff; }
+        .c-lake    { color: #32ade6; background: #32ade6; }
+        .c-night   { color: #ff9f0a; background: #ff9f0a; }
+        .c-rest    { color: #8e8e93; background: #8e8e93; }
+        .c-hike    { color: #30d158; background: #30d158; }
+        .c-temple  { color: #ff453a; background: #ff453a; }
+        .c-return  { color: #ff453a; background: #ff453a; }
+
+        .tl-card {
+            flex: 1;
+            background: #fff;
+            border-radius: 16px;
+            padding: 14px 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border-left: 3px solid transparent;
+            margin-bottom: 2px;
+        }
+        .b-drive  { border-left-color: #34c97a; }
+        .b-food   { border-left-color: #ff9f0a; }
+        .b-hotel  { border-left-color: #bf5af2; }
+        .b-metro  { border-left-color: #0a84ff; }
+        .b-lake   { border-left-color: #32ade6; }
+        .b-night  { border-left-color: #ff9f0a; }
+        .b-rest   { border-left-color: #8e8e93; }
+        .b-hike   { border-left-color: #30d158; }
+        .b-temple { border-left-color: #ff453a; }
+        .b-return { border-left-color: #ff453a; }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 7px;
+        }
+        .card-icon { font-size: 18px; line-height: 1; }
+        .card-title { font-size: 15px; font-weight: 700; color: #1c1c1e; }
+
+        .card-body {
+            font-size: 13px;
+            color: #48484a;
+            line-height: 1.75;
+        }
+        .card-body strong { color: #1a8a56; font-weight: 600; }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 8px;
+        }
+        .tg { background: #e8f8f0; color: #1a8a56; }
+        .to { background: #fff4e0; color: #c75a00; }
+        .tb { background: #e0f0ff; color: #0a5299; }
+        .tp { background: #f3e8fd; color: #7b3fc4; }
+        .tr { background: #fde8e8; color: #c0392b; }
+
+        /* ── Hike Card ── */
+        .hike-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+        .hike-head {
+            background: linear-gradient(135deg, #1a5c8a, #34a0c9);
+            padding: 18px 16px 14px;
+        }
+        .hike-head h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+        .hike-head p { font-size: 12px; color: rgba(255,255,255,0.8); }
+
+        .hike-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid #f2f2f7;
+        }
+        .hstat {
+            padding: 14px 10px;
+            text-align: center;
+            border-right: 1px solid #f2f2f7;
+        }
+        .hstat:last-child { border-right: none; }
+        .hstat .v { font-size: 20px; font-weight: 800; color: #1a5c8a; }
+        .hstat .l { font-size: 11px; color: #8e8e93; margin-top: 2px; }
+
+        .hike-wps { padding: 14px 16px; }
+        .hike-wps h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #8e8e93;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .wp {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f2f2f7;
+        }
+        .wp:last-child { border-bottom: none; }
+        .wp-n {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a5c8a, #34a0c9);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .wp-info { flex: 1; }
+        .wp-name { font-size: 14px; font-weight: 600; color: #1c1c1e; }
+        .wp-desc { font-size: 12px; color: #8e8e93; margin-top: 1px; }
+        .wp-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: #e0f0ff;
+            color: #1a5c8a;
+            flex-shrink: 0;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+            margin-top: 20px;
+            padding: 28px 20px 40px;
+            text-align: center;
+        }
+        .footer strong {
+            display: block;
+            font-size: 15px;
+            color: #a8ffd4;
+            margin-bottom: 6px;
+        }
+        .footer p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+        /* ── Safe area for notch phones ── */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .hero { padding-top: calc(56px + env(safe-area-inset-top)); }
+            .footer { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-pill">五一假期 · 家庭出行</div>
+    <h1>遇见<em>杭州</em></h1>
+    <p class="hero-sub">上海出发 · 西湖漫步 · 九溪徒步</p>
+    <div class="hero-chips">
+        <div class="chip"><span class="n">2</span><span class="l">天行程</span></div>
+        <div class="chip"><span class="n">5/1</span><span class="l">出发日期</span></div>
+        <div class="chip"><span class="n">~15km</span><span class="l">徒步路线</span></div>
+    </div>
+</div>
+
+<div class="section">
+
+    <!-- DAY 1 -->
+    <div class="day-banner">
+        <div class="day-banner-left">
+            <h2>5月1日 · 抵杭 · 西湖</h2>
+            <p>从上海出发，午抵杭州，下午游览西湖</p>
+        </div>
+        <div class="day-num">01</div>
+    </div>
+
+    <!-- Route -->
+    <div class="route-strip">
+        <div class="route-strip-label">今日路线</div>
+        <div class="route-inner">
+            <span class="rn">上海出发</span>
+            <span class="ra">→</span>
+            <span class="rn">沪昆高速</span>
+            <span class="ra">→</span>
+            <span class="rn">杭州滨江</span>
+            <span class="ra">→</span>
+            <span class="rn">维也纳酒店</span>
+            <span class="ra">→</span>
+            <span class="rn">地铁换乘</span>
+            <span class="ra">→</span>
+            <span class="rn">西湖</span>
+        </div>
+    </div>
+
+    <div class="timeline">
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-drive"></div>
+                <div class="tl-time">09:30</div>
+            </div>
+            <div class="tl-card b-drive">
+                <div class="card-top">
+                    <span class="card-icon">🚗</span>
+                    <span class="card-title">从上海出发</span>
+                </div>
+                <div class="card-body">
+                    从 <strong>米兰诺贵都小区</strong> 出发，走 <strong>沪昆高速 G60</strong>，全程约 170km，预计 2–2.5 小时（五一车流多，提前查好路况）。
+                    <div class="tags">
+                        <span class="tag tg">沪昆高速 G60</span>
+                        <span class="tag to">约170km</span>
+                        <span class="tag tb">预计2小时</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-food"></div>
+                <div class="tl-time">12:00</div>
+            </div>
+            <div class="tl-card b-food">
+                <div class="card-top">
+                    <span class="card-icon">🍜</span>
+                    <span class="card-title">滨江简餐</span>
+                </div>
+                <div class="card-body">
+                    抵达杭州滨江后就近解决午餐：<br>
+                    🏬 <strong>龙湖滨江天街</strong> — 品牌餐饮齐全，停车方便<br>
+                    🏬 <strong>滨江银泰城</strong> — 餐饮丰富，适合快捷用餐
+                    <div class="tags">
+                        <span class="tag to">简餐为主</span>
+                        <span class="tag tb">预留时间给西湖</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-hotel"></div>
+                <div class="tl-time">13:30</div>
+            </div>
+            <div class="tl-card b-hotel">
+                <div class="card-top">
+                    <span class="card-icon">🏨</span>
+                    <span class="card-title">入住 · 稍作休整</span>
+                </div>
+                <div class="card-body">
+                    入住 <strong>维也纳智好酒店（滨江店）</strong>，放下行李小憩片刻，为下午的西湖游览养精蓄锐。酒店毗邻钱塘江，夜晚可欣赏江景。
+                    <div class="tags">
+                        <span class="tag tp">维也纳智好酒店</span>
+                        <span class="tag tb">近钱塘江</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-metro"></div>
+                <div class="tl-time">14:30</div>
+            </div>
+            <div class="tl-card b-metro">
+                <div class="card-top">
+                    <span class="card-icon">🚇</span>
+                    <span class="card-title">换乘地铁 · 前往西湖</span>
+                </div>
+                <div class="card-body">
+                    驾车至 <strong>江陵路地铁站</strong> 停车场，换乘地铁直达 <strong>吴山广场站</strong>，步行约 500 米即到西湖边。省去景区停车难题。
+                    <div class="tags">
+                        <span class="tag tb">江陵路 → 吴山广场</span>
+                        <span class="tag tg">步行500m到湖边</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-lake"></div>
+                <div class="tl-time">15:00</div>
+            </div>
+            <div class="tl-card b-lake">
+                <div class="card-top">
+                    <span class="card-icon">⛵</span>
+                    <span class="card-title">游览西湖 · 坐船观景</span>
+                </div>
+                <div class="card-body">
+                    漫步西湖，感受"水光潋滟晴方好"。在码头乘游船前往：<br>
+                    🏝️ <strong>三潭印月</strong> — 西湖十景之首<br>
+                    🌿 <strong>湖心亭</strong> — 全湖尽收眼底<br>
+                    🌸 <strong>苏堤</strong> — 垂柳依依，徒步最美
+                    <div class="tags">
+                        <span class="tag tb">游船票约45元/人</span>
+                        <span class="tag tg">建议游览2-3小时</span>
+                        <span class="tag to">五一需提前排队</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-night"></div>
+                <div class="tl-time">18:30</div>
+            </div>
+            <div class="tl-card b-night">
+                <div class="card-top">
+                    <span class="card-icon">🥢</span>
+                    <span class="card-title">晚餐 · 杭帮菜备选</span>
+                </div>
+                <div class="card-body">
+                    傍晚就近品尝杭帮菜，以下餐厅可备选：<br>
+                    🦐 <strong>老头儿油爆虾</strong> — 本地人气老店，油爆虾鲜嫩入味<br>
+                    🌿 <strong>绿茶餐厅</strong> — 环境雅致，面包诱惑、绿茶烤鸡必点<br>
+                    🏮 <strong>新白鹿餐厅</strong> — 杭帮菜老字号，出品稳定
+                    <br><br>⚠️ 若等位超过 45 分钟，可先就近简餐。
+                    <div class="tags">
+                        <span class="tag to">三店可任选其一</span>
+                        <span class="tag tr">五一期间需等位</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-rest"></div>
+                <div class="tl-time">20:30</div>
+            </div>
+            <div class="tl-card b-rest">
+                <div class="card-top">
+                    <span class="card-icon">🌊</span>
+                    <span class="card-title">返回 · 钱塘江观景</span>
+                </div>
+                <div class="card-body">
+                    根据返程时间灵活选择：<br>
+                    🚢 <strong>游船观景（19:30 前返回）</strong> — 搭乘钱塘江夜游游船，灯火璀璨，江面宽阔，体验最佳<br>
+                    🚶 <strong>岸边散步（19:30 后返回）</strong> — 沿江岸漫步，夜风习习，远眺两岸灯光同样壮观
+                    <br><br>顺路去 <strong>盒马鲜生</strong> 采购次日徒步补给（面包、坚果、水果）。早点休息！
+                    <div class="tags">
+                        <span class="tag tb">游船或岸边二选一</span>
+                        <span class="tag tg">盒马采购徒步补给</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /timeline -->
+
+    <!-- DAY 2 -->
+    <div class="day-banner day2">
+        <div class="day-banner-left">
+            <h2>5月2日 · 九溪徒步</h2>
+            <p>九溪烟树 → 龙井村 → 十里琅珰 → 法喜寺</p>
+        </div>
+        <div class="day-num">02</div>
+    </div>
+
+    <!-- Hike Map Card -->
+    <div class="hike-card">
+        <div class="hike-head">
+            <h3>🥾 九溪徒步环线</h3>
+            <p>茶园 · 古刹 · 溪流三合一，杭州最美山林路线</p>
+        </div>
+        <div class="hike-stats">
+            <div class="hstat"><div class="v">~15km</div><div class="l">全程距离</div></div>
+            <div class="hstat"><div class="v">5–6h</div><div class="l">预计时长</div></div>
+            <div class="hstat"><div class="v">中等</div><div class="l">难度等级</div></div>
+        </div>
+
+        <!-- SVG Trail Map -->
+        <div style="padding: 16px 12px 20px; background:#f0f6f0;">
+            <div style="font-size:11px;font-weight:700;color:#1a5c8a;letter-spacing:1px;margin-bottom:12px;padding-left:4px;">🗺️ 路线地图</div>
+            <svg viewBox="0 0 320 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+                <defs>
+                    <linearGradient id="trailGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#34c97a"/>
+                        <stop offset="40%" style="stop-color:#0a84ff"/>
+                        <stop offset="75%" style="stop-color:#ff453a"/>
+                        <stop offset="100%" style="stop-color:#ff9f0a"/>
+                    </linearGradient>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.18"/>
+                    </filter>
+                </defs>
+
+                <!-- 背景 -->
+                <rect x="0" y="0" width="320" height="460" fill="#e8f4e8" rx="12"/>
+                <!-- 山体 -->
+                <ellipse cx="155" cy="170" rx="135" ry="95" fill="#d4ebb8" opacity="0.55"/>
+                <ellipse cx="75"  cy="210" rx="65"  ry="55" fill="#c8e6a0" opacity="0.45"/>
+                <ellipse cx="245" cy="200" rx="75"  ry="50" fill="#cce8a8" opacity="0.45"/>
+                <!-- 溪流 -->
+                <path d="M 125 430 Q 120 400 122 375 Q 124 345 118 320 Q 113 295 122 272"
+                      stroke="#7ec8e3" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+                <!-- ══ 主路线（顺时针环形）══ -->
+                <!-- 起点 → 九溪烟树 -->
+                <path d="M 155 435 L 155 390" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 九溪烟树 → 三分叉 -->
+                <path d="M 155 380 L 155 335" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 三分叉 → 十八涧（向左上） -->
+                <path d="M 152 325 Q 125 305 110 278" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 十八涧 → 龙井村 -->
+                <path d="M 108 268 Q 100 242 102 215 Q 104 192 112 175" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 龙井村 → 十里琅珰 -->
+                <path d="M 116 165 Q 138 142 155 130" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 十里琅珰 → 法喜寺（右弧） -->
+                <path d="M 162 122 Q 196 130 218 152 Q 234 170 234 192" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 法喜寺 → 云端亭（继续向右下） -->
+                <path d="M 232 202 Q 230 228 222 252 Q 212 272 205 295" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                <!-- 云端亭 → 终点（向左下回环） -->
+                <path d="M 200 305 Q 192 328 182 355 Q 172 385 160 435" stroke="url(#trailGrad)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+                <!-- 方向箭头（去程） -->
+                <polygon points="126,298 114,284 108,302" fill="#0a84ff" opacity="0.7"/>
+                <!-- 方向箭头（返程） -->
+                <polygon points="194,316 208,306 196,296" fill="#ff9f0a" opacity="0.7"/>
+
+                <!-- ══ 节点 ══ -->
+
+                <!-- S 起/终点 九溪入口 -->
+                <circle cx="155" cy="437" r="13" fill="#34c97a" filter="url(#shadow)"/>
+                <text x="155" y="441" text-anchor="middle" fill="white" font-size="10" font-weight="800">S</text>
+                <rect x="170" y="428" width="68" height="20" rx="6" fill="white" opacity="0.92" filter="url(#shadow)"/>
+                <text x="204" y="441" text-anchor="middle" fill="#1a6b3a" font-size="9" font-weight="700">九溪景区入口</text>
+
+                <!-- 1 九溪烟树 -->
+                <circle cx="155" cy="383" r="10" fill="#30d158" filter="url(#shadow)"/>
+                <text x="155" y="387" text-anchor="middle" fill="white" font-size="9" font-weight="700">1</text>
+                <rect x="168" y="375" width="58" height="18" rx="5" fill="white" opacity="0.92" filter="url(#shadow)"/>
+                <text x="197" y="387" text-anchor="middle" fill="#1a6b3a" font-size="8.5" font-weight="700">九溪烟树</text>
+
+                <!-- 2 三分叉 -->
+                <circle cx="155" cy="328" r="10" fill="#ff9f0a" filter="url(#shadow)"/>
+                <text x="155" y="332" text-anchor="middle" fill="white" font-size="8" font-weight="800">叉</text>
+                <rect x="90" y="320" width="54" height="18" rx="5" fill="#fff4e0" opacity="0.95" filter="url(#shadow)"/>
+                <text x="117" y="332" text-anchor="middle" fill="#c75a00" font-size="8.5" font-weight="700">三分叉</text>
+
+                <!-- 3 九溪十八涧 -->
+                <circle cx="108" cy="272" r="10" fill="#0a84ff" filter="url(#shadow)"/>
+                <text x="108" y="276" text-anchor="middle" fill="white" font-size="9" font-weight="700">2</text>
+                <rect x="12" y="264" width="88" height="18" rx="5" fill="white" opacity="0.92" filter="url(#shadow)"/>
+                <text x="56" y="276" text-anchor="middle" fill="#0a5299" font-size="8.5" font-weight="700">九溪十八涧</text>
+
+                <!-- 4 龙井村 -->
+                <circle cx="112" cy="170" r="10" fill="#0a84ff" filter="url(#shadow)"/>
+                <text x="112" y="174" text-anchor="middle" fill="white" font-size="9" font-weight="700">3</text>
+                <rect x="6" y="162" width="98" height="18" rx="5" fill="#fff8e0" opacity="0.95" filter="url(#shadow)"/>
+                <text x="55" y="174" text-anchor="middle" fill="#c75a00" font-size="8.5" font-weight="700">龙井村（午餐）</text>
+
+                <!-- 5 十里琅珰 -->
+                <circle cx="158" cy="125" r="10" fill="#0a84ff" filter="url(#shadow)"/>
+                <text x="158" y="129" text-anchor="middle" fill="white" font-size="9" font-weight="700">4</text>
+                <rect x="88" y="106" width="64" height="18" rx="5" fill="white" opacity="0.92" filter="url(#shadow)"/>
+                <text x="120" y="118" text-anchor="middle" fill="#0a5299" font-size="8.5" font-weight="700">十里琅珰</text>
+
+                <!-- 6 法喜寺 -->
+                <circle cx="233" cy="196" r="10" fill="#ff453a" filter="url(#shadow)"/>
+                <text x="233" y="200" text-anchor="middle" fill="white" font-size="9" font-weight="700">5</text>
+                <rect x="246" y="188" width="68" height="18" rx="5" fill="white" opacity="0.92" filter="url(#shadow)"/>
+                <text x="280" y="200" text-anchor="middle" fill="#c0392b" font-size="8.5" font-weight="700">法喜寺（斋饭）</text>
+
+                <!-- 7 云端亭 -->
+                <circle cx="202" cy="300" r="10" fill="#bf5af2" filter="url(#shadow)"/>
+                <text x="202" y="304" text-anchor="middle" fill="white" font-size="8" font-weight="800">云</text>
+                <rect x="215" y="292" width="52" height="18" rx="5" fill="#f3e8fd" opacity="0.95" filter="url(#shadow)"/>
+                <text x="241" y="304" text-anchor="middle" fill="#7b3fc4" font-size="8.5" font-weight="700">云端亭</text>
+
+                <!-- 图例 -->
+                <rect x="8" y="8" width="96" height="38" rx="8" fill="white" opacity="0.85"/>
+                <line x1="15" y1="22" x2="34" y2="22" stroke="url(#trailGrad)" stroke-width="3" stroke-linecap="round"/>
+                <text x="38" y="26" fill="#333" font-size="8.5" font-weight="600">主线路</text>
+                <polygon points="20,33 14,27 14,36" fill="#0a84ff" opacity="0.7"/>
+                <text x="25" y="37" fill="#555" font-size="8">行进方向</text>
+
+                <!-- 方位 -->
+                <text x="304" y="20" text-anchor="middle" fill="#1a6b3a" font-size="11" font-weight="800">N</text>
+                <line x1="304" y1="23" x2="304" y2="33" stroke="#1a6b3a" stroke-width="2"/>
+                <polygon points="304,23 301,31 304,29 307,31" fill="#1a6b3a"/>
+            </svg>
+
+            <!-- 图例说明 -->
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding:0 2px;">
+                <div style="display:flex;align-items:center;gap:5px;background:white;padding:5px 9px;border-radius:10px;font-size:11px;">
+                    <span style="width:11px;height:11px;border-radius:50%;background:#34c97a;display:inline-block;flex-shrink:0;"></span>起/终点
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;background:white;padding:5px 9px;border-radius:10px;font-size:11px;">
+                    <span style="width:11px;height:11px;border-radius:50%;background:#ff9f0a;display:inline-block;flex-shrink:0;"></span>三分叉
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;background:white;padding:5px 9px;border-radius:10px;font-size:11px;">
+                    <span style="width:11px;height:11px;border-radius:50%;background:#bf5af2;display:inline-block;flex-shrink:0;"></span>云端亭
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;background:white;padding:5px 9px;border-radius:10px;font-size:11px;">
+                    <span style="width:11px;height:11px;border-radius:50%;background:#ff453a;display:inline-block;flex-shrink:0;"></span>法喜寺
+                </div>
+            </div>
+        </div>
+
+        <!-- 节点说明 -->
+        <div class="hike-wps">
+            <h4>📍 途经节点</h4>
+            <div class="wp">
+                <div class="wp-n" style="background:linear-gradient(135deg,#34c97a,#30d158);">S</div>
+                <div class="wp-info"><div class="wp-name">九溪景区入口</div><div class="wp-desc">停好车，正式出发</div></div>
+                <div class="wp-badge" style="background:#e8f8f0;color:#1a6b3a;">起/终点</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n">1</div>
+                <div class="wp-info"><div class="wp-name">九溪烟树</div><div class="wp-desc">溪水潺潺，薄雾轻绕，西湖十景</div></div>
+                <div class="wp-badge">必打卡</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n" style="background:linear-gradient(135deg,#ff9f0a,#ffcc00);color:#7a4f00;">叉</div>
+                <div class="wp-info">
+                    <div class="wp-name">三分叉</div>
+                    <div class="wp-desc">路线岔口，向左上行走十八涧方向</div>
+                </div>
+                <div class="wp-badge" style="background:#fff4e0;color:#c75a00;">岔路口</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n">2</div>
+                <div class="wp-info"><div class="wp-name">九溪十八涧</div><div class="wp-desc">山涧溪流，石阶蜿蜒，清幽宜人</div></div>
+                <div class="wp-badge">景色佳</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n">3</div>
+                <div class="wp-info"><div class="wp-name">龙井村</div><div class="wp-desc">龙井茶核心产地，可在此简餐品茶</div></div>
+                <div class="wp-badge" style="background:#fff8e0;color:#c75a00;">午餐点</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n">4</div>
+                <div class="wp-info"><div class="wp-name">十里琅珰</div><div class="wp-desc">茶园层叠，林荫古道，最美路段</div></div>
+                <div class="wp-badge">最美段</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n" style="background:linear-gradient(135deg,#ff453a,#ff6b6b);">5</div>
+                <div class="wp-info"><div class="wp-name">法喜寺（上天竺）</div><div class="wp-desc">千年古刹，可吃斋饭，香火鼎盛</div></div>
+                <div class="wp-badge" style="background:#fde8e8;color:#c0392b;">斋饭可选</div>
+            </div>
+            <div class="wp">
+                <div class="wp-n" style="background:linear-gradient(135deg,#bf5af2,#9b59b6);">6</div>
+                <div class="wp-info">
+                    <div class="wp-name">云端亭</div>
+                    <div class="wp-desc">返程途中山顶观景亭，俯瞰西湖全景，回九溪入口必经</div>
+                </div>
+                <div class="wp-badge" style="background:#f3e8fd;color:#7b3fc4;">返程必经</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline">
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-food"></div>
+                <div class="tl-time">08:30</div>
+            </div>
+            <div class="tl-card b-food">
+                <div class="card-top">
+                    <span class="card-icon">🍳</span>
+                    <span class="card-title">酒店自助早餐</span>
+                </div>
+                <div class="card-body">
+                    享用酒店自助早餐，8:30–9:00 用餐，吃饱补充能量。记得带上昨晚在盒马采购的零食和水。
+                    <div class="tags">
+                        <span class="tag to">酒店自助餐</span>
+                        <span class="tag tg">提前退房行李存车</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-hotel"></div>
+                <div class="tl-time">09:30</div>
+            </div>
+            <div class="tl-card b-hotel">
+                <div class="card-top">
+                    <span class="card-icon">🧳</span>
+                    <span class="card-title">退房 · 开车前往九溪</span>
+                </div>
+                <div class="card-body">
+                    办理退房，行李放入车中，驾车前往 <strong>九溪景区</strong>。从滨江约 25–35 分钟，导航至九溪停车场。
+                    <div class="tags">
+                        <span class="tag tb">约30分钟车程</span>
+                        <span class="tag tg">九溪景区停车场</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-hike"></div>
+                <div class="tl-time">10:00</div>
+            </div>
+            <div class="tl-card b-hike">
+                <div class="card-top">
+                    <span class="card-icon">🌿</span>
+                    <span class="card-title">九溪烟树 → 十八涧</span>
+                </div>
+                <div class="card-body">
+                    从景区入口沿溪而上，穿越 <strong>九溪烟树</strong>，竹林掩映、溪流清澈，再沿 <strong>九溪十八涧</strong> 拾级而上，流水声声相伴。
+                    <div class="tags">
+                        <span class="tag tg">溪边山路全程</span>
+                        <span class="tag tb">建议穿运动鞋</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-food"></div>
+                <div class="tl-time">12:00</div>
+            </div>
+            <div class="tl-card b-food">
+                <div class="card-top">
+                    <span class="card-icon">🍵</span>
+                    <span class="card-title">龙井村 · 午餐 / 品茶</span>
+                </div>
+                <div class="card-body">
+                    抵达 <strong>龙井村</strong>，西湖龙井茶核心产区。午餐可选：<br>
+                    🍽️ <strong>村内农家乐</strong> — 龙井虾仁、腌笃鲜<br>
+                    🌾 <strong>路边简餐</strong> — 搭配自带徒步零食<br>
+                    🍵 <strong>茶馆小憩</strong> — 品一杯新茶补充能量
+                    <div class="tags">
+                        <span class="tag tg">龙井茶产地</span>
+                        <span class="tag to">农家菜性价比高</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-hike"></div>
+                <div class="tl-time">13:30</div>
+            </div>
+            <div class="tl-card b-hike">
+                <div class="card-top">
+                    <span class="card-icon">🏔️</span>
+                    <span class="card-title">十里琅珰 · 最美茶园古道</span>
+                </div>
+                <div class="card-body">
+                    整条环线最精华路段。茶园层叠，远处西湖隐约可见，林荫蔽日，最适合拍照的地方。
+                    <div class="tags">
+                        <span class="tag tg">最美茶园风光</span>
+                        <span class="tag tb">拍照必到</span>
+                        <span class="tag to">约5km路段</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-temple"></div>
+                <div class="tl-time">15:00</div>
+            </div>
+            <div class="tl-card b-temple">
+                <div class="card-top">
+                    <span class="card-icon">🏯</span>
+                    <span class="card-title">法喜寺（上天竺）</span>
+                </div>
+                <div class="card-body">
+                    千年古刹，香火鼎盛。可选：<br>
+                    🍚 <strong>寺内斋饭</strong> — 素净清淡，体验禅意<br>
+                    🙏 <strong>参拜礼佛</strong> — 感受古寺宁静
+                    <div class="tags">
+                        <span class="tag tr">千年古刹</span>
+                        <span class="tag tg">斋饭约10-15元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-hike"></div>
+                <div class="tl-time">16:00</div>
+            </div>
+            <div class="tl-card b-hike">
+                <div class="card-top">
+                    <span class="card-icon">🔄</span>
+                    <span class="card-title">环线收尾 · 返回九溪</span>
+                </div>
+                <div class="card-body">
+                    从法喜寺绕回 <strong>九溪景区入口</strong>，完成完整环线。取车休整，换下徒步装备。
+                    <div class="tags">
+                        <span class="tag tg">完成环线</span>
+                        <span class="tag tb">约1-1.5小时</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-food"></div>
+                <div class="tl-time">17:30</div>
+            </div>
+            <div class="tl-card b-food">
+                <div class="card-top">
+                    <span class="card-icon">🦐</span>
+                    <span class="card-title">杭帮菜正餐 · 错峰用餐</span>
+                </div>
+                <div class="card-body">
+                    17:30 错峰，避开 18:30 后的高峰。备选餐厅：<br>
+                    🦐 <strong>老头儿油爆虾</strong> — 招牌油爆虾，必吃老店<br>
+                    🌿 <strong>绿茶餐厅</strong> — 面包诱惑、绿茶烤鸡<br>
+                    🏮 <strong>新白鹿餐厅</strong> — 杭帮菜老字号，出品稳定
+                    <div class="tags">
+                        <span class="tag to">17:30错峰就餐</span>
+                        <span class="tag tg">三店任选其一</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tl-item">
+            <div class="tl-left">
+                <div class="tl-dot c-return"></div>
+                <div class="tl-time">19:00</div>
+            </div>
+            <div class="tl-card b-return">
+                <div class="card-top">
+                    <span class="card-icon">🏠</span>
+                    <span class="card-title">踏上归途 · 返回上海</span>
+                </div>
+                <div class="card-body">
+                    饭后走 <strong>沪昆高速 G60</strong> 返沪。19:00–19:30 出发可避开返程高峰（高峰通常 20:00 后），预计 21:00–22:00 抵家。
+                    <div class="tags">
+                        <span class="tag tr">19:00前出发更顺</span>
+                        <span class="tag tb">G60高速返沪</span>
+                        <span class="tag tg">预计21点到家</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /timeline -->
+
+</div><!-- /section -->
+
+<div class="footer">
+    <strong>上海 → 杭州 · 五一两日游</strong>
+    <p>2025年5月1日 – 5月2日 · 家庭亲子出行<br>西湖漫步 · 九溪徒步 · 杭帮美食</p>
+</div>
+
+</body>
+</html>
